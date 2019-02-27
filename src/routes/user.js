@@ -3,7 +3,7 @@ let express= require('express');
 let router=express.Router();
 let validate=require('../middleware/validate');
 let commonController=require('../controller/userController')
-
+let schemacheck=require('../Schema/userSchema')
 router.get('/api',(req,res)=>{
     res.json({
         message:"Welcome to node api"
@@ -48,7 +48,7 @@ function verifyToken(req,res,next){
 
     }
     else{
-        res.sendStatus(403)
+        res.status(403).send("Authentication token not passed")
     }
 }
 

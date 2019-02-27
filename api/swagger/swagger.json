@@ -1,0 +1,401 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is First App User CRUD API Documentation",
+    "title": "First App"
+    
+  },
+  "host": "localhost:5000/",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "First App",
+      "description": "this use to stored user details"
+     
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  
+  "paths": {
+    "/api/login": {
+      "post": {
+        "tags": [
+          "First App"
+        ],
+        "summary": "To login into application",
+        "description": "",
+        "operationId": "lgoin",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Login object is used to login into application",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "login_auth": [
+              "write:logins",
+              "read:logins"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/saveUserDetails": {
+      "post": {
+        "tags": [
+          "First App"
+        ],
+        "summary": "To save user details",
+        "description": "",
+        "operationId": "saveUser",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Save user object is used to save details of user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/saveUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful Login",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "login_auth": [
+              "write:logins",
+              "read:logins"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/getUserDetails": {
+      "get": {
+        "tags": [
+          "First App"
+        ],
+        "summary": "To get user details",
+        "description": "",
+        "operationId": "login",
+        
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "email id of get details of that",
+            "required": true,
+            "type": "string",
+            "format":"email"
+            
+
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful get result",
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          }
+        },
+        "security": [
+          {
+            "login_auth": [
+              "write:logins",
+              "read:logins"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/updateUserDetails": {
+      "put": {
+        "tags": [
+          "First App"
+        ],
+        "summary": "To update user details",
+        "description": "",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "email id of get details of that",
+            "required": true,
+            "type": "string"
+            
+
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "update user object is used to save modify details of user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful Updated operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/updateUser"
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "login_auth": [
+              "write:logins",
+              "read:logins"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/deleteUserDetails": {
+      "delete": {
+        "tags": [
+          "First App"
+        ],
+        "summary": "To update user details",
+        "description": "",
+        "operationId": "deleteUser",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "email id of get details of that",
+            "required": true,
+            "type": "string"
+            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful Deleted operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/updateUser"
+              }
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": [
+          {
+            "login_auth": [
+              "write:logins",
+              "read:logins"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "login_auth": {
+      "type": "apiKey",
+      "name": "authorization",
+      "value":"Bearer",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    
+    "Login": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "string",
+          "example":"abc@domain.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "abc123"
+        }
+      },
+      "xml": {
+        "name": "First App"
+      }
+    },
+    "saveUser":{
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "userName",
+        "password",
+        "mobileNo"
+      ],
+      "properties": {
+        "name":{
+          "type":"string",
+          "format":"string",
+          "example":"domain"
+        },
+        "email": {
+          "type": "string",
+          "format": "string",
+          "example":"abc@domain.com"
+        },
+        "userName":{
+          "type":"string",
+          "format":"string",
+          "example":"dummydomain"
+        },
+        "password": {
+          "type": "string",
+          "example": "abc123"
+        },
+        "mobileNo":{
+          "type": "integer",
+          "format": "int64",
+          "example":1234567890
+        }
+      },
+      "xml": {
+        "name": "First App"
+      }
+    },
+    "updateUser":{
+      "type": "object",
+      "required": [
+        "name",
+        "email",
+        "userName",
+        "password",
+        "mobileNo"
+      ],
+      "properties": {
+        "name":{
+          "type":"string",
+          "format":"string",
+          "example":"domain"
+        },
+        "email": {
+          "type": "string",
+          "format": "string",
+          "example":"abc123@domain.com"
+        },
+        "userName":{
+          "type":"string",
+          "format":"string",
+          "example":"dummydomain"
+        },
+        "password": {
+          "type": "string",
+          "example": "abc123"
+        },
+        "mobileNo":{
+          "type": "integer",
+          "format": "int64",
+          "example":1234567890
+        }
+      },
+      "xml": {
+        "name": "First App"
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
